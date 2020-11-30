@@ -43,14 +43,16 @@ bot.onText(/\/dylists/, (msg) => {
 
 async function checkDyUpdates(msg_id, name, time = 10 * 1000) {
   let previousData = (await check(dyJSON[name]))
+  console.log(previousData.works)
   setInterval(async () => {
       let newData = (await check(dyJSON[name]))
+      console.log(newData.works)
       if (newData.focus !== previousData.focus) {
           bot.sendMessage(msg_id, `${name}目前关注数为${newData.focus}`)
       }
       let change = newData.works - previousData.works
       if (change !== 0) {
-        console.log(`${new Date()} check dy updates`)
+        console.log(`${new Date()} check dy updates ${change}`)
           const resMsg = (change > 0) ? `${name}更新了${change}部作品` : `${name}可能删减了${0-change}部作品`
           bot.sendMessage(msg_id, `${resMsg}, 点击${dyJSON[name].user}查看！`)
       }
@@ -59,7 +61,7 @@ async function checkDyUpdates(msg_id, name, time = 10 * 1000) {
 }
 checkDyUpdates(user.msg_id, "test")
 checkDyUpdates(user.msg_id, "胡楚靓", 5 * 60 * 1000)
-
+checkDyUpdates(user.msg_id, "人民日报", 10 * 60 * 1000)
 
 bot.onText(/\/echo (.+)/, (msg, match) => {
 
