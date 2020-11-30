@@ -29,7 +29,7 @@ bot.onText(/\/test/, (msg) => {
 })
 
 
-bot.onText(/\/ heck/, async (msg) => {
+bot.onText(/\/check/, async (msg) => {
   const res = await check(dyJSON["南北芝麻糊"])
   const resMsg = `南北芝麻糊 当前粉丝数${res.follower}, 关注数${res.focus}, 被赞量${res.likedNum}, 作品数${res.works}, 喜欢的作品${res.likes}`
   bot.sendMessage(msg.chat.id, resMsg)
@@ -59,6 +59,7 @@ async function checkDyUpdates(msg_id, name, time = 10 * 1000) {
 }
 checkDyUpdates(user.msg_id, "test")
 checkDyUpdates(user.msg_id, "胡楚靓", 5 * 60 * 1000)
+
 
 bot.onText(/\/echo (.+)/, (msg, match) => {
 
