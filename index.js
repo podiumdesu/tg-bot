@@ -47,7 +47,7 @@ async function checkDyUpdates(msg_id, name, time = 10 * 1000) {
   console.log(previousData.works)
   setInterval(async () => {
       let newData = (await check(dyJSON[name]))
-      console.log(newData.works)
+      // console.log(newData.works)
       if ((isNumber(newData.focus) && isNumber(newData.focus)) && (newData.focus !== previousData.focus)) {
           bot.sendMessage(msg_id, `${name}目前关注数为${newData.focus}`)
       }
