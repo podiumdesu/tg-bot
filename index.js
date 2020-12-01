@@ -5,6 +5,7 @@ const user = require("./user.json")
 const token = '1268459911:AAFY1R2O-wN_4cfyNWhR4XmhwYTRErNSnc0'
 
 import check from './dy/check'
+import { isNumber } from 'util';
 
 const bot = new TelegramBot(token, {
   polling: true
@@ -47,7 +48,7 @@ async function checkDyUpdates(msg_id, name, time = 10 * 1000) {
   setInterval(async () => {
       let newData = (await check(dyJSON[name]))
       console.log(newData.works)
-      if (newData.focus !== previousData.focus) {
+      if ((isNumber(newData.focus) && isNumber(newData.focus)) && (newData.focus !== previousData.focus)) {
           bot.sendMessage(msg_id, `${name}目前关注数为${newData.focus}`)
       }
       let change = newData.works - previousData.works
